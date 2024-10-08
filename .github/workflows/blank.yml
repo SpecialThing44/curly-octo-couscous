@@ -1,0 +1,25 @@
+name: CI
+
+on:
+  push:
+  
+jobs:
+  one:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run a one-line script
+        run: echo Hello, world!
+  two:
+    if: false
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run a one-line script
+        run: echo Hello, world!
+  three:
+    needs:
+      - one
+      - two
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run a one-line script
+        run: echo Hello, world!
