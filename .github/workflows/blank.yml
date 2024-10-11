@@ -8,9 +8,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Run a one-line script
-        run: echo Hello, world!
+        shell: bash
+        run: |
+          echo "VERSION_PATTERN=$VERSION_PATTERN_NODE" >> "$GITHUB_ENV"
+        env:
+          VERSION_PATTERN_NODE: '^\s*"version": "(\d+\.\d+\.\d+)".*$'
+          VERSION_PATTERN_SBT: 'ThisBuild / version := "(\d+\.\d+\.\d+)"'
   two:
-    if: false
+    if: true
     runs-on: ubuntu-latest
     steps:
       - name: Run a one-line script
@@ -22,4 +27,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Run a one-line script
-        run: echo Hello, world!
+        shell: bash
+        run: |
+          echo "$VERSION_PATTERN"
